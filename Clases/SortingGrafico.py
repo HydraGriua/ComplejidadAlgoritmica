@@ -1,7 +1,6 @@
 import random
 import time
 from matplotlib import pyplot as plt
-
 # Bubble sort   
 def Bubblesort(v): 
   n, intercambia, x = len(v), True, -1
@@ -42,38 +41,19 @@ def Quicksort(v):
 
 def quickSortHelper(v,first,last):
    if first<last:
-
        splitpoint = partition(v,first,last)
-
        quickSortHelper(v,first,splitpoint-1)
        quickSortHelper(v,splitpoint+1,last)
 
-def partition(v,first,last):
-   pivotvalue = v[first]
-
-   leftmark = first+1
-   rightmark = last
-
-   done = False
-   while not done:
-
-       while leftmark <= rightmark and v[leftmark] <= pivotvalue:
-           leftmark = leftmark + 1
-
-       while v[rightmark] >= pivotvalue and rightmark >= leftmark:
-           rightmark = rightmark -1
-
-       if rightmark < leftmark:
-           done = True
-       else:
-           temp = v[leftmark]
-           v[leftmark] = v[rightmark]
-           v[rightmark] = temp
-
-   temp = v[first]
-   v[first] = v[rightmark]
-   v[rightmark] = temp
-   return rightmark
+def partition(arr, low, high):
+    i = (low-1)       
+    pivot = arr[(low+high)//2]    
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i = i+1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return (i+1)
 
 
 # Merge sort
@@ -137,17 +117,17 @@ def measure_time(sorting_alg, v,X):
 
 #Generar vectores
 def GenVec():
-  x = random.sample(range(1000001),5)
-  y = random.sample(range(1000001),10)
-  z = random.sample(range(1000001),50)
-  w = random.sample(range(1000001),100)
-  q = random.sample(range(1000001),250)
-  p = random.sample(range(1000001),500)
-  r = random.sample(range(1000001),1000)
-  #t = random.sample(range(1000001),10000)
-  #u = random.sample(range(1000001),100000)
+  x = random.sample(range(20),5)
+  y = random.sample(range(100),10)
+  z = random.sample(range(100),50)
+  w = random.sample(range(1000),100)
+  q = random.sample(range(1000),250)
+  p = random.sample(range(1000),500)
+  r = random.sample(range(10000),1000)
+  t = random.sample(range(100000),10000)
+  u = random.sample(range(1000001),100000)
   #c = random.sample(range(1000001),1000000)
-  A = [x,y,z,w,q,p,r]#,t,u,c]
+  A = [x,y,z,w,q,p,r,t,u]#,c]
   return A
 
 A = GenVec()
@@ -159,22 +139,28 @@ Merge = []
 Quick = []
 Heap = []
 
-B = A.copy() 
-C = A.copy() 
-D = A.copy() 
-E = A.copy() 
-F = A.copy() 
-G = A.copy() 
+B = A.copy()
+
 for i in B:
   measure_time(Mergesort, i,Merge)
+C = A.copy()
+   
 for i in C:
   measure_time(Insertionsort, i,Insertion)
+D = A.copy()
+
 for i in D:
   measure_time(Bubblesort, i,Bubble)
+E = A.copy() 
+
 for i in E:
   measure_time(Quicksort, i,Quick)
+F = A.copy()
+
 for i in F:
   measure_time(Selectionsort, i,Selection)
+G = A.copy()
+
 for i in G:
   measure_time(Heapsort, i,Heap)
 
@@ -182,7 +168,7 @@ for i in G:
 
 
 #X: elementos en el arr
-arr = [5, 10, 50, 100, 250, 500, 1000]#, 10000, 100000, 1000000]
+arr = [5, 10, 50, 100, 250, 500, 1000, 10000, 100000]#, 1000000]
 
 
 # Lineas 
