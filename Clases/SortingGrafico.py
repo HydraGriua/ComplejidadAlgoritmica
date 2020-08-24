@@ -2,13 +2,13 @@ import random
 import time
 from matplotlib import pyplot as plt
 # Bubble sort   
-def Bubblesort(v): 
-  n, intercambia, x = len(v), True, -1
+def Bubblesort(arr): 
+  n, intercambia, x = len(arr), True, -1
   while intercambia:
     intercambia, x = False, x + 1
     for i in range(1, n-x):
-      if v[i-1] > v[i]:
-        v[i-1], v[i] = v[i], v[i-1]
+      if arr[i-1] > arr[i]:
+        arr[i-1], arr[i] = arr[i], arr[i-1]
         intercambia = True   
 
 
@@ -36,14 +36,14 @@ def Selectionsort(arr):
 
 
 # Quick sort
-def Quicksort(v):
-   quickSortHelper(v,0,len(v)-1)
+def Quicksort(arr):
+   quick_(arr,0,len(arr)-1)
 
-def quickSortHelper(v,first,last):
+def quick_(arr,first,last):
    if first<last:
-       splitpoint = partition(v,first,last)
-       quickSortHelper(v,first,splitpoint-1)
-       quickSortHelper(v,splitpoint+1,last)
+       splitpoint = partition(arr,first,last)
+       quick_(arr,first,splitpoint-1)
+       quick_(arr,splitpoint+1,last)
 
 def partition(arr, low, high):
     i = (low-1)       
@@ -57,53 +57,53 @@ def partition(arr, low, high):
 
 
 # Merge sort
-def Mergesort(v):
-    if len(v)>1:
-        piv = len(v)//2
-        l = v[:piv]
-        r = v[piv:]
+def Mergesort(arr):
+    if len(arr)>1:
+        piv = len(arr)//2
+        l = arr[:piv]
+        r = arr[piv:]
         Mergesort(l)
         Mergesort(r)
         i = j = k = 0
         while i < len(l) and j < len(r):
             if l[i] < r[j]:
-                v[k] = l[i]
+                arr[k] = l[i]
                 i+=1
             else:
-                v[k] = r[j]
+                arr[k] = r[j]
                 j +=1
             k += 1
     
         while i < len(l):
-            v[k] = l[i]
+            arr[k] = l[i]
             i += 1
             k += 1
 
         while j < len(r):
-            v[k] = r[j]
+            arr[k] = r[j]
             j += 1
             k += 1
 
 
 # Heap Sort            
-def heapify(v, n, i):
+def heapify(arr, n, i):
       largest = i
       l = 2 * i + 1
       r = 2 * i + 2
-      if l < n and v[i] < v[l]:
+      if l < n and arr[i] < arr[l]:
           largest = l
-      if r < n and v[largest] < v[r]:
+      if r < n and arr[largest] < arr[r]:
           largest = r
       if largest != i:
-          v[i], v[largest] = v[largest], v[i]
-          heapify(v, n, largest) 
-def Heapsort(v):
-      n = len(v)
+          arr[i], arr[largest] = arr[largest], arr[i]
+          heapify(arr, n, largest) 
+def Heapsort(arr):
+      n = len(arr)
       for i in range(n//2, -1, -1):
-          heapify(v, n, i)
+          heapify(arr, n, i)
       for i in range(n-1, 0, -1):
-          v[i], v[0] = v[0], v[i]
-          heapify(v, i, 0)
+          arr[i], arr[0] = arr[0], arr[i]
+          heapify(arr, i, 0)
 
 
 #Medir el tiempo
