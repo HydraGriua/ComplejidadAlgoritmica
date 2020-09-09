@@ -1,7 +1,7 @@
 import numpy as np
 def Karatsuba(X,Y):
     X,Y = str(X),str(Y)
-    n = len(X)
+    n = max(len(X),len(Y))
     if n>1:
         if n % 2 != 0:
             X,Y = '0'+X,'0'+Y
